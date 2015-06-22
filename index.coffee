@@ -74,7 +74,7 @@ app.post '/webhooks/tracked-board', (request, response) ->
 
       Trello.post "/1/cards/#{shortLink}/actions/comments"
       , text: """
-      > :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from a comment at [#{data.card.name}](https://trello.com/c/#{data.card.shortLink}) on [#{commentDate}](https://trello.com/c/#{data.card.shortLink})
+      > :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from a comment at https://trello.com/c/#{data.card.shortLink} on [#{commentDate}](https://trello.com/c/#{data.card.shortLink})
         """, (err, res) ->
         if err
           console.log err
