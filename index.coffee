@@ -71,11 +71,14 @@ app.post '/webhooks/tracked-board', (request, response) ->
   if action.memberCreator.id == '557976153d63ef846e16a992' # @cardsync
     return
 
-  commentDate = moment(action.date).format('MMM D, YYYY')
-  refText = """
-> :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from #{if action.type.indexOf('omment') != -1 then 'a comment at ' else if action.type.indexOf('heck') != -1 then 'a checkItem from' else 'the description of'} https://trello.com/c/#{data.card.shortLink} on [#{commentDate}](https://trello.com/c/#{data.card.shortLink})
-  """
-  notHere = (match) -> match not in [data.card.id, data.card.shortLink]
+  try
+    commentDate = moment(action.date).format('MMM D, YYYY')
+    refText = """
+>   :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from #{if action.type.indexOf('omment') != -1 then 'a comment at ' else if action.type.indexOf('heck') != -1 then 'a checkItem from' else 'the description of'} https://trello.com/c/#{data.card.shortLink} on [#{commentDate}](https://trello.com/c/#{data.card.shortLink})
+    """
+    notHere = (match) -> match not in [data.card.id, data.card.shortLink]
+  catch e
+    return
 
   handle = switch action.type
     when 'commentCard'
