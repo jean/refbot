@@ -77,7 +77,7 @@ app.post '/webhooks/tracked-board', (request, response) ->
   try
     commentDate = moment(action.date).format('MMM D, YYYY')
     refText = """
->   :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from #{if action.type.indexOf('omment') != -1 then 'a comment at ' else if action.type.indexOf('heck') != -1 then 'a checkItem from' else 'the description of'} https://trello.com/c/#{data.card.shortLink} on #{commentDate}[.](http://websitesfortrello.com/)
+>   :paperclip: [#{action.memberCreator.username}](https://trello.com/#{action.memberCreator.username}) referenced this card from #{if action.type.indexOf('omment') != -1 then 'a comment at ' else if action.type.indexOf('heck') != -1 then 'a checkItem from' else 'the description of'} https://trello.com/c/#{data.card.shortLink} on #{commentDate}.
     """
     notHere = (match) -> match not in [data.card.id, data.card.shortLink]
   catch e
