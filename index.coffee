@@ -71,6 +71,9 @@ app.post '/webhooks/tracked-board', (request, response) ->
   if action.memberCreator.id == '557976153d63ef846e16a992' # @cardsync
     return
 
+  if action.memberCreator.id == '56fec32951e64568882bc201' # @butlerbot
+    return
+
   try
     commentDate = moment(action.date).format('MMM D, YYYY')
     refText = """
